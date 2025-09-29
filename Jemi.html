@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Jemi ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      text-align: center; overflow: hidden;
+      background: linear-gradient(-45deg, #ff758c, #ff7eb3, #fad0c4, #ffdde1);
+      background-size: 400% 400%;
+      animation: fondo 12s ease infinite;
+      color: #fff;
+    }
+    @keyframes fondo {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .pantalla {
+      display: none;
+      width: 90%;
+      max-width: 500px; /* más ancho */
+      animation: aparecer 1s ease forwards;
+      border-radius: 20px;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Pantalla login */
+    #login {
+      background: #222;
+      padding: 25px;
+      border-radius: 30px;
+      box-shadow: inset 0 0 10px #000, 0 8px 20px rgba(0,0,0,0.6);
+      position: relative;
+    }
+    .password-display {
+      font-size: 2rem;
+      letter-spacing: 12px;
+      margin-bottom: 15px;
+      background: rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.6);
+    }
+    .teclado {
+      display: grid;
+      grid-template-columns: repeat(3, 90px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .teclado button {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.6rem;
+      background: linear-gradient(145deg, #fff, #ddd);
+      color: #ff4d6d;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+      transition: 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .teclado button:hover {
+      background: #ffe1ec;
+      transform: scale(1.1);
+    }
+    .teclado .ok {
+      background: #ff4d6d; color: #fff;
+      box-shadow: 0 0 15px #ff4d6d;
+    }
+    .teclado .ok:hover { background: #e63e5c; }
+
+    /* Animación de número pulsado */
+    .efecto-num {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 2rem;
+      color: #ff4d6d;
+      animation: subirNum 0.6s forwards;
+      pointer-events: none;
+    }
+    @keyframes subirNum {
+      0% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%,-200%) scale(1.5); }
+    }
+
+    /* Carta */
+    .sobre {
+      width: 90%;
+      max-width: 500px;   /* más ancho */
+      min-height: 400px;  /* más alto */
+      background: #fff;
+      position: relative;
+      margin: 0 auto;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+      overflow: hidden;
+      padding-top: 140px; /* deja espacio para la tapa */
+    }
+    .tapa {
+      width: 100%; height: 150px;
+      background: #ff4d6d;
+      position: absolute;
+      top: 0; left: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transition: transform 1s;
+      transform-origin: top;
+    }
+    .sobre.abierto .tapa {
+      transform: rotateX(180deg);
+    }
+    .contenido-carta {
+      opacity: 0;
+      transition: opacity 1s;
+      padding: 25px;
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .sobre.abierto .contenido-carta {
+      opacity: 1;
+    }
+    .contenido-carta img {
+      width: 100%;
+      max-height: 220px;  /* imagen más grande */
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Botón continuar */
+    .continuar-btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff4d6d, #ff758c);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      animation: latido 1.5s infinite;
+    }
+    .continuar-btn:hover {
+      transform: scale(1.1);
+    }
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Pregunta */
+    #pregunta {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 25px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    #pregunta button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 20px;
+      background: #fff;
+      color: #ff4d6d;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: 0.3s;
+    }
+    #pregunta button:hover {
+      background: #ffe1ec;
+      transform: scale(1.08);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) scale(0.8);
+      background: #fff;
+      color: #333;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      text-align: center;
+      display: none;
+      animation: pop 0.4s forwards;
+    }
+    @keyframes pop {
+      to { transform: translate(-50%,-50%) scale(1); }
+    }
+
+    /* Corazones flotando */
+    .corazon {
+      position: absolute;
+      bottom: -20px;
+      animation: subir 8s linear infinite;
+    }
+    @keyframes subir {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="login" class="pantalla" style="display:block;">
+    <h1>🔐 Antes de entrar...</h1>
+    <p>¿En que fecha nos conocimos? ❤️</p>
+    <div class="password-display" id="clave">••••</div>
+    <div class="teclado">
+      <button onclick="agregar('1', this)">1</button>
+      <button onclick="agregar('2', this)">2</button>
+      <button onclick="agregar('3', this)">3</button>
+      <button onclick="agregar('4', this)">4</button>
+      <button onclick="agregar('5', this)">5</button>
+      <button onclick="agregar('6', this)">6</button>
+      <button onclick="agregar('7', this)">7</button>
+      <button onclick="agregar('8', this)">8</button>
+      <button onclick="agregar('9', this)">9</button>
+      <button onclick="borrar()">⌫</button>
+      <button onclick="agregar('0', this)">0</button>
+      <button class="ok" onclick="verificar()">✔</button>
+    </div>
+    <p id="error" style="color:#fff; margin-top:15px;"></p>
+  </div>
+
+  <div id="carta" class="pantalla">
+    <div class="sobre" onclick="abrirCarta()">
+      <div class="tapa"></div>
+      <div class="contenido-carta">
+        <h2>💌 Para ti, Jemi</h2>
+        <img src="karla_foto.jpg" alt="Foto de Karla" id="foto">
+        <p>
+          Hoy quiero preguntarte algo muy especial...
+        </p>
+        <button class="continuar-btn" onclick="mostrarPregunta()">Continuar ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pregunta" class="pantalla">
+    <h1>❤️ Jemi, ¿quieres estar conmigo?</h1>
+    <button onclick="mostrarModal('Eres lo mejor que me pasó en la vida 💕')">💖 Sí, claro 💖</button>
+    <button onclick="mostrarModal('🙈 Igual te amo y no te dejaré ir 💖')">🙈 No</button>
+  </div>
+
+  <div id="modal" class="modal"></div>
+
+  <audio id="musica" autoplay loop muted>
+    <source src="karla.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let claveIngresada = "";
+
+    function agregar(num, boton) {
+      if (claveIngresada.length < 4) {
+        claveIngresada += num;
+        actualizarDisplay();
+
+        // Efecto número flotando
+        let efecto = document.createElement("div");
+        efecto.classList.add("efecto-num");
+        efecto.innerText = num;
+        boton.appendChild(efecto);
+        setTimeout(()=>efecto.remove(),600);
+      }
+    }
+    function borrar() {
+      claveIngresada = claveIngresada.slice(0, -1);
+      actualizarDisplay();
+    }
+    function actualizarDisplay() {
+      let display = document.getElementById("clave");
+      display.innerText = claveIngresada.replace(/./g, "•") + "••••".slice(claveIngresada.length);
+    }
+
+    function verificar() {
+      if(claveIngresada === "0923"){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("carta").style.display = "block";
+        lanzarCorazones();
+      } else {
+        document.getElementById("error").innerText = "❌ Ups... intenta de nuevo";
+        claveIngresada = "";
+        actualizarDisplay();
+      }
+    }
+
+    function abrirCarta() {
+      document.querySelector(".sobre").classList.add("abierto");
+    }
+
+    function mostrarPregunta() {
+      document.getElementById("carta").style.display = "none";
+      document.getElementById("pregunta").style.display = "block";
+    }
+
+    function mostrarModal(texto){
+      let modal = document.getElementById("modal");
+      modal.innerHTML = `<h2>${texto}</h2>`;
+      modal.style.display = "block";
+      setTimeout(()=>modal.style.display="none",4000);
+    }
+
+    function lanzarCorazones(){
+      setInterval(() => {
+        let corazon = document.createElement("div");
+        corazon.classList.add("corazon");
+        corazon.innerHTML = ["❤️","💖","💘","💕","💓"][Math.floor(Math.random()*5)];
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.fontSize = Math.random() * 20 + 15 + "px";
+        corazon.style.animationDuration = (Math.random()*4+4) + "s";
+        document.body.appendChild(corazon);
+        setTimeout(() => corazon.remove(), 8000);
+      }, 400);
+    }
+
+    // Música arranca muteada, y al primer clic se activa
+    const musica = document.getElementById("musica");
+    musica.play().catch(()=>{});
+    document.addEventListener("click", () => {
+      musica.muted = false;
+      musica.play();
+    }, { once: true });
+
+    actualizarDisplay();
+  </script>
+
+</body>
+</html>
